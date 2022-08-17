@@ -1,0 +1,48 @@
+- name: Installing gnu-sed
+  homebrew:
+    name: gnu-sed
+
+- name: Ensuring ZSH is installed
+  stat:
+    path: /bin/zsh
+  register: zsh_preinstalled
+
+- name: Install zsh
+  homebrew:
+    name: zsh
+  when:
+    - not zsh_preinstalled.stat.exists
+  tags:
+    - zsh
+    - macOs
+
+- name: Change shell
+  shell: chsh -s $(which zsh)
+  tags:
+    - zsh
+
+- name: Check that the .oh-my-zsh file exists
+  stat:
+    path: /Users/kjempehjerne/.oh-my-zsh
+  register: oh_my_stats
+
+- name: Install Oh My zsh
+  shell: >-
+    curl -L
+    https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh >
+    ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  when: oh_my_stats.stat.exists == False
+  tags:
+    - zsh
+
+- name: Install git plugin
+  git:
+    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+    dest: ~/.oh-my-zsh/plugins/zsh-autosuggestions
+  tags:
+    - zsh
+
+- name: update .zshrc
+  shell: sed -i '' -e 's/(git/(git zsh-autosuggestions/' ~/.zshrc
+  tags:
+    - zsh
