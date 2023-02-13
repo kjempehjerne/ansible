@@ -3,9 +3,11 @@
   homebrew:
     name: ['nodejs', 'npm']
   tags:
-  - node
+    - node
+    - install
 
 - name: Installing nvm
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
   tags:
-  - node 
+    - node 
+    - install

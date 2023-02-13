@@ -1,13 +1,31 @@
 - hosts: localhost
-  become: true
+  become: false
   gather_facts: true
+  vars:
+    install_homebrew_if_missing: false
   pre_tasks:
-    - name: Update cache
-      apt:
-        update_cache: true
-      tags:
-      - node
-      - zsh
-  tasks: 
-  - include: tasks/zsh.yml
-  - include: tasks/node.yml
+    - name: Ensuring Homebrew is Installed
+      stat:
+        path: /opt/homebrew/bin
+      register: homebrew_check
+    - name: Fail If Homebrew Is not
+      fail:
+        msg: 'Homebrew is missing, installing from http://brew.sh'
+      when:
+        - not homebrew_check.stat.exists
+        - not install_homebrew_if_missing
+    - name: Installing Homebrew
+      shell: >-
+        /bin/bash -c "$(curl -fsSL
+        https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      when:
+        - not homebrew_check.stat.exists
+        - install_homebrew_if_missing
+  tasks:
+   # - include: tasks/zsh-setup.yml
+   # - include: tasks/node-setup.yml
+   # - include: tasks/slack.yml
+   # - include: tasks/applications.yml
+   # - include: tasks/dotfiles.yml
+   # - include: tasks/rest.yml
+    - include: tasks/npm-packages.yml

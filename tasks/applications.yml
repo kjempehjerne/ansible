@@ -1,0 +1,70 @@
+- name: Checking if Alacritty is installed
+  stat:
+    path: /Applications/Insomnia.app
+  register: insomnia_installed
+  tags:
+    - install
+
+- name: Installing Insomnia
+  shell: brew install --cask insomnia
+  when: not insomnia_installed.stat.exists
+  tags:
+    - install
+
+- name: Check if Alacritty is installed
+  stat:
+    path: /Applications/Alacritty.app
+  register: alacritty_installed
+  tags:
+    - install
+    - core
+
+- name: Installing Alacritty
+  shell: brew install --cask alacritty
+  when: not alacritty_installed.stat.exists
+  tags:
+    - install
+    - core
+
+- name: Check if Slack is installed
+  stat:
+    path: /Applications/Slack.app
+  register: slack_installed
+  tags:
+    - install
+    - slack
+
+- name: Installing Slack
+  shell: brew install --cask slack
+  when: not slack_installed.stat.exists
+  tags:
+    - install
+    - slack
+
+- name: Check if Alfred is installed
+  stat:
+    path: /Applications/Alfred 5.app
+  register: alfred_installed
+  tags:
+    - install
+    - productivity
+
+- name: Installing Alfred
+  shell: brew install --cask alfred
+  when: not alfred_installed.stat.exists
+  tags:
+    - install
+    - productivity
+
+- name: Check if Brave is installed
+  stat:
+    path: /Applications/Brave Browser.app
+  register: brave_installed
+  tags:
+    - install
+
+- name: Installing Brave
+  shell: brew install --cask brave-browser
+  when: not brave_installed.stat.exists
+  tags:
+    - install

@@ -1,29 +1,3 @@
-# Ubuntu
-- name: Downloading slack
-  get_url:
-    url: https://downloads.slack-edge.com/linux_releases/slack-desktop-4.19.2-amd64.deb
-    dest: /tmp/slack.deb
-    when: ansible_facts['distribution'] == "Ubuntu"
-
-- name: Remove Any previous slacks
-  become: true
-  apt:
-    name: slack-desktop
-    state: absent
-  tags:
-    - install
-    - slack
-  when: ansible_facts['distribution'] == "Ubuntu"
-
-- name: Install Slack .deb package
-  become: true
-  apt:
-    deb: /tmp/slack.deb
-  tags:
-    - install
-    - slack
-  when: ansible_facts['distribution'] == "Ubuntu"
-
 # MacOS
-- name: Installing slack
-  when: ansible_facts['os_familiy'] == "Darwin"
+- name: Installing slack for macOs
+  shell: brew install --cask slack

@@ -1,0 +1,130 @@
+- name: Installing openshift cli
+  homebrew:
+    name: openshift-cli
+  tags:
+    - telenor
+    - install
+
+- name: Installing tmux
+  homebrew:
+    name: tmux
+  tags:
+    - install
+    - productivity
+
+- name: Installing neovim
+  homebrew:
+    name: neovim
+  tags:
+    - install
+    - productivity
+
+- name: Installing vscode
+  shell: brew install --cask visual-studio-code
+  tags:
+    - install
+    - productivity
+
+- name: Installing yabai
+  shell: brew install koekeishiya/formulae/yabai
+  tags:
+    - install
+    - productivity
+
+- name: Installing yabai
+  shell: brew install koekeishiya/formulae/yabai
+  tags:
+    - install
+    - productivity
+
+- name: Installing yabai scripting addition
+  shell: sudo yabai --install-sa
+  tags:
+    - install
+    - productivity
+
+- name: Installing yabai load scripting addition
+  shell: sudo yabai --load-sa
+  tags:
+    - install
+    - productivity
+
+- name: Installing skhd
+  shell: brew install koekeishiya/formulae/skhd
+  tags:
+    - install
+    - productivity
+
+- name: Installing exa
+  homebrew:
+    name: exa
+
+- name: Replacing ls with exa
+  shell: 
+  tags:
+    - never
+
+- name: Installing caddy
+  homebrew:
+    name: caddy
+  tags:
+    - install
+    - productivity
+    - telenor
+
+- name: Installing redis
+  homebrew:
+    name: redis
+  tags:
+    - install
+    - telenor
+
+- name: Installing rust
+  shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  tags:
+    - install
+    - core
+
+- name: Installing golang
+  homebrew:
+    name: go
+  tags:
+    - install
+    - core
+
+- name: Installing gopls
+  homebrew:
+    name: gopls
+  tags:
+    - install
+    - core
+
+- name: Installing ripgre
+  homebrew:
+    name: ripgrep
+  tags:
+    - install
+    - core
+
+- name: Installing fzf
+  homebrew:
+    name: fzf 
+  tags:
+    - install
+    - core
+
+- name: Installing exa
+  homebrew:
+    name: exa
+  tags:
+    - install
+    - core
+
+- name: Installing kubernetes-cli
+  homebrew:
+    name: kubernetes-cli
+  tags:
+    - install
+    - core
+
+

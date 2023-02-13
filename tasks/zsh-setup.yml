@@ -1,11 +1,17 @@
 - name: Installing gnu-sed
   homebrew:
     name: gnu-sed
+  tags:
+    - install
+    - zsh
 
 - name: Ensuring ZSH is installed
   stat:
     path: /bin/zsh
   register: zsh_preinstalled
+  tags:
+    - install
+    - zsh
 
 - name: Install zsh
   homebrew:
@@ -19,12 +25,16 @@
 - name: Change shell
   shell: chsh -s $(which zsh)
   tags:
+    - install
     - zsh
 
 - name: Check that the .oh-my-zsh file exists
   stat:
     path: /Users/kjempehjerne/.oh-my-zsh
   register: oh_my_stats
+  tags:
+    - install
+    - zsh
 
 - name: Install Oh My zsh
   shell: >-
@@ -33,6 +43,7 @@
     ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
   when: oh_my_stats.stat.exists == False
   tags:
+    - install
     - zsh
 
 - name: Install git plugin
@@ -40,9 +51,11 @@
     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
     dest: ~/.oh-my-zsh/plugins/zsh-autosuggestions
   tags:
+    - install
     - zsh
 
 - name: update .zshrc
   shell: sed -i '' -e 's/(git/(git zsh-autosuggestions/' ~/.zshrc
   tags:
     - zsh
+    - install
